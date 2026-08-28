@@ -1,4 +1,5 @@
 from pathlib import path
+import pandas as pd
 
 class FileStructureError(Exception):
   pass
@@ -28,3 +29,14 @@ def file_validate(filename):
     raise PermissionError(
       "File cannot be accepted. Check the file permissions."
     )
+
+
+class DatasetValidationError(Exception):
+	pass
+
+def dataset_validate(dataframe):
+	if dataframe.shape[0] == 0:
+		raise DatasetValidationError("Dataset contains no rows.")
+	elif dataframe.shape[1] == 0:
+		raise DatasetValidationError("Dataset contains no columns.")
+
