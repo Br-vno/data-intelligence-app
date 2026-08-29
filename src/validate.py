@@ -1,8 +1,12 @@
 from pathlib import path
 import pandas as pd
 
+
 class FileStructureError(Exception):
   pass
+class DatasetValidationError(Exception):
+	pass
+
 
 def file_validate(filename):
     file= path(filename)
@@ -30,9 +34,6 @@ def file_validate(filename):
       "File cannot be accepted. Check the file permissions."
     )
 
-
-class DatasetValidationError(Exception):
-	pass
 
 def dataset_validate(dataframe):
 	if dataframe.shape[0] == 0:
