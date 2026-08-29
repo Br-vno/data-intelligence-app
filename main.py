@@ -1,6 +1,8 @@
-from src.analyze import analyze_data
+from src.validate import file_validate, dataset_validate
+from src.load import load_data
+from src.analyze import analyze_data, visualization_data
+from src.visualize import create_visualizations
 
-results = analyze_data(dataframe)
 
 def report(results, filename):
     print(
@@ -24,3 +26,24 @@ def report(results, filename):
         + f"{results['descriptive_statistics']}\n"
         + "=" * 30
     )
+
+
+filename = input("Please enter a file name.")
+
+try:
+    file_validate(filename)              #file-level validation
+    dataframe = load_data(filename)      #loads file and retruns a dataframe
+    dataset_validate(dataframe)          #data-level validation
+    results = analyze_data(dataframe)    #analyze data and returns a dictionary
+    report(results, filename)            #loads dictionary and retuns a terminal build report
+    data = visualization_data(dataframe) #loads dataframe and returns dictionary 
+    create_visualizations(data)          #create and saves plots 
+
+except FileNotFoundError as error:
+    print(error)
+
+except FileStructureError as error:
+    print(error)
+
+except DatasetValidationError as error:
+    print(error)
