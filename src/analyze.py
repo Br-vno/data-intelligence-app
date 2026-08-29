@@ -23,5 +23,10 @@ def analyze_data(dataframe):
     "Categorical Columns" : categorical_columns,
     "descriptive_statistics" : descriptive_statistics
   }
-    
+
+def visualization_data(dataframe):
+    return {
+        "missing_values": dataframe.isnull().sum(),
+        "numerical_data": dataframe.select_dtypes(include="number")
+    }
   
