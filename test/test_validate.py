@@ -1,6 +1,12 @@
 import pytest
+import pandas as pd
 
-from src.validate import file_validate, FileStructureError
+from src.validate import (
+    file_validate,
+    FileStructureError,
+    dataset_validate,
+    DatasetValidationError,
+)
 
 
 def test_valid_csv():
@@ -23,3 +29,28 @@ def test_wrong_file_extension(tmp_path):
 
     with pytest.raises(FileStructureError):
         file_validate(test_file)
+
+
+def test_valid_dataset():
+    dataframe = pd.DataFrame({
+        "A": [1, 2],
+        "B": [3, 4]
+    })
+
+    dataset_validate(dataframe)
+
+
+def test_no_rows():
+    dataframe = pd.DataFrame(columns=["A", "B"])
+
+    with pytest.raises(DatasetValidationError):
+        dataset_validate(dataframe)
+
+
+def test_no_columns():
+    dataframe = pd.DataFrame(index=[0, 1])
+
+    with pytest.raises(DatasetValidationError):
+        dataset_validate(dataframe)
+
+
