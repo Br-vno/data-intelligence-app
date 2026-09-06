@@ -18,7 +18,7 @@ def analyze_data(dataframe):
   return {
     "rows" : rows,
     "columns" : columns,
-    "total missing_values" : tot_missing_vals,
+    "total_missing_values" : tot_missing_vals,
     "numerical_columns" : numerical_columns,
     "categorical_columns" : categorical_columns,
     "descriptive_statistics" : descriptive_stats
