@@ -4,7 +4,7 @@ def analyze_data(dataframe):
   rows = dataframe.shape[0]
   columns = dataframe.shape[1]
   
-  tot_missing_vals = dataframe.isnull().sum()
+  tot_missing_vals = dataframe.isnull().sum().sum()
   
   numerical_columns = dataframe.select_dtypes(
     include="number"
@@ -16,12 +16,12 @@ def analyze_data(dataframe):
   
   descriptive_stats = dataframe.describe()
   return {
-    "Rows" : rows,
-    "Columns" : columns,
-    "Total Missing Values" : tot_missing_vals,
-    "Numerical Columns" : numerical_columns,
-    "Categorical Columns" : categorical_columns,
-    "descriptive_statistics" : descriptive_statistics
+    "rows" : rows,
+    "columns" : columns,
+    "total missing_values" : tot_missing_vals,
+    "numerical_columns" : numerical_columns,
+    "categorical_columns" : categorical_columns,
+    "descriptive_statistics" : descriptive_stats
   }
 
 def visualization_data(dataframe):
