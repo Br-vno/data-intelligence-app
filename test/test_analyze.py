@@ -75,4 +75,48 @@ def test_descriptive_statistics():
         pd.DataFrame
     )
 
+def test_visualization_missing_values():
+    dataframe = pd.DataFrame({
+        "age": [20, None, 40],
+        "salary": [50000, 60000, None],
+        "name": ["Alice", "Bob", "Charlie"]
+    })
+
+    results = visualization_data(dataframe)
+
+    assert results["missing_values"]["age"] == 1
+    assert results["missing_values"]["salary"] == 1
+    assert results["missing_values"]["name"] == 0
+
+
+def test_visualization_numerical_data():
+    dataframe = pd.DataFrame({
+        "age": [20, 30, 40],
+        "salary": [50000, 60000, 70000],
+        "name": ["Alice", "Bob", "Charlie"]
+    })
+
+    results = visualization_data(dataframe)
+
+    assert list(results["numerical_data"].columns) == [
+        "age",
+        "salary"
+    ]
+
+
+def test_visualization_data_structure():
+    dataframe = pd.DataFrame({
+        "score": [80, 90, 70],
+        "category": ["A", "B", "C"]
+    })
+
+    results = visualization_data(dataframe)
+
+    assert isinstance(results, dict)
+
+    assert set(results.keys()) == {
+        "missing_values",
+        "numerical_data"
+    }
+
 
