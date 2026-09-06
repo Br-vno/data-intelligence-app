@@ -7,7 +7,7 @@ from src.load import load_data
 def test_load_data():
   dataframe = load_data("data/titanic.csv")
   
-  assert isinstance(dataframe, pd)
+  assert isinstance(dataframe, pd.DataFrame)
 
 
 def test_data_loaded_correctly():
