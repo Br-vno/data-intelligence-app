@@ -16,7 +16,7 @@ def test_create_visualizations(tmp_path, monkeypatch):
 
     data = visualization_data(dataframe)
 
-    create_visualizations(data)
+    create_visualizations(data, tmp_path)
 
     assert (tmp_path / "missing_values.png").exists()
     assert (tmp_path / "numerical_distributions.png").exists()

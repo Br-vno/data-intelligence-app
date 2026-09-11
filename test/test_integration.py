@@ -1,4 +1,4 @@
-from src.validate import file_validate, dataset_validate, 
+from src.validate import file_validate, dataset_validate
 from src.load import load_data
 from src.analyze import analyze_data, visualization_data
 from src.visualize import create_visualizations
@@ -19,7 +19,7 @@ def test_full_pipeline(tmp_path, monkeypatch):
   
   data = visualization_data(dataframe) 
   assert isinstance(data, dict) 
-  
-  create_visualizations(data)
+
+  create_visualizations(data, tmp_path)
   assert (tmp_path / "missing_values.png").exists() 
   assert (tmp_path / "numerical_distributions.png").exists()
